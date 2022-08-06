@@ -1,7 +1,7 @@
 FROM centos:centos7.9.2009
 
 RUN yum -y update
-RUN yum -y install epel-release hping3 net-tools nc lsof tcpdump traceroute fallocate ethtool iptables iproute
+RUN yum -y install epel-release nc tcpdump fallocate net-tools iproute
 WORKDIR /root
 ENV container docker
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \

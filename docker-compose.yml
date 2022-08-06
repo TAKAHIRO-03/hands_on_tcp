@@ -10,7 +10,7 @@ services:
     tty: true
     networks:
       hands_on_tcp_sender:
-        ipv4_address: 172.19.0.2
+        ipv4_address: 172.19.0.3
   receiver:
     build: .
     image: hands_on_tcp
@@ -20,44 +20,18 @@ services:
     tty: true
     networks:
       hands_on_tcp_receiver:
-        ipv4_address: 172.21.0.2
-  proxy1:
-    build: .
-    image: hands_on_tcp
-    container_name: proxy1
-    hostname: proxy1
-    privileged: true
-    tty: true
-    networks:
-      hands_on_tcp_receiver:
-        ipv4_address: 172.21.0.3
-      hands_on_tcp_proxy:
         ipv4_address: 172.20.0.3
-  proxy2:
+  router:
     build: .
     image: hands_on_tcp
-    container_name: proxy2
-    hostname: proxy2
+    container_name: router
+    hostname: router
     privileged: true
     tty: true
-    networks:
-      hands_on_tcp_receiver:
-        ipv4_address: 172.21.0.4
-      hands_on_tcp_proxy:
-        ipv4_address: 172.20.0.4
-  reverse_proxy:
-    build: .
-    image: hands_on_tcp
-    container_name: reverse_proxy
-    hostname: reverse_proxy
-    privileged: true
-    tty: true
-    ports:
-      - 8888:80
     networks:
       hands_on_tcp_sender:
-        ipv4_address: 172.19.0.3
-      hands_on_tcp_proxy:
+        ipv4_address: 172.19.0.2
+      hands_on_tcp_receiver:
         ipv4_address: 172.20.0.2
 networks:
   hands_on_tcp_sender:
@@ -65,13 +39,8 @@ networks:
       driver: default
       config:
         - subnet: 172.19.0.0/16
-  hands_on_tcp_proxy:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.20.0.0/16
   hands_on_tcp_receiver:
     ipam:
       driver: default
       config:
-        - subnet: 172.21.0.0/16
+        - subnet: 172.20.0.0/16
