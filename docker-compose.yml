@@ -11,6 +11,8 @@ services:
     networks:
       hands_on_tcp_sender:
         ipv4_address: 172.19.0.3
+    volumes:
+      - ./volume:/root/volume
   receiver:
     build: .
     image: hands_on_tcp
