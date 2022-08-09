@@ -8,6 +8,8 @@ services:
     hostname: sender
     privileged: true
     tty: true
+    cap_add:
+    - NET_ADMIN
     networks:
       hands_on_tcp_sender:
         ipv4_address: 172.19.0.3
@@ -20,6 +22,8 @@ services:
     hostname: receiver
     privileged: true
     tty: true
+    cap_add:
+    - NET_ADMIN
     networks:
       hands_on_tcp_receiver:
         ipv4_address: 172.20.0.3
@@ -30,6 +34,8 @@ services:
     hostname: router
     privileged: true
     tty: true
+    cap_add:
+    - NET_ADMIN
     networks:
       hands_on_tcp_sender:
         ipv4_address: 172.19.0.2

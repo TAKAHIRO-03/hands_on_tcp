@@ -78,3 +78,10 @@ $ ~ はホストOSで操作しています。
 5. 同ディレクトリのvolume配下にudp.pcapが出力されるので、それをWiresharkで結果を確認
 6. [root@router ~]# journalctl --list-boots # 再起動の時刻を確認
 
+
+
+## 送信端末からパケットロスを意図的に起こし送信する。
+
+### TCP
+tc qdisc add dev enp0s3 root netem loss 10%
+
